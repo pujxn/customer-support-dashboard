@@ -2,20 +2,21 @@ import { tickets } from "../mock/tickets";
 import TicketCard from "./TicketCard";
 
 type Props = {
-    nameFilterString: string | null
+    nameFilterString: string | null,
+    subjectFilterString: string | null
 }
 
-const CardsList = ({ nameFilterString }: Props) => {
+const CardsList = ({ nameFilterString, subjectFilterString }: Props) => {
 
-    const ticketsFilteredByName = tickets.filter(ticket => ticket.customerName.includes(nameFilterString ?? ""))
+    const filteredTickets = tickets.filter(ticket => ticket.customerName.includes(nameFilterString ?? "")).filter(ticket => ticket.subject.includes(subjectFilterString ?? ""))
 
     return (
         <div>
-            {ticketsFilteredByName.map(ticket => (
+            {filteredTickets.map(ticket => (
                 <TicketCard key={ticket.id} ticket={ticket} />
             ))
             }
-        </div >
+        </div>
     )
 }
 
