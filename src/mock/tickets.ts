@@ -1,6 +1,6 @@
 import type { Ticket } from "../types/ticket"
 
-export const tickets: Ticket[] = [
+export const allTickets: Ticket[] = [
     {
         id: "1",
         subject: "Unable to login to account",

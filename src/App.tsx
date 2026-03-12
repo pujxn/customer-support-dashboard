@@ -1,10 +1,13 @@
 import { useState } from "react"
-import { tickets } from "./mock/tickets";
+import { allTickets } from "./mock/tickets";
 import CardsList from "./components/CardsList"
-import SearchFilterLayout from "./components/SearchFilterLayout";
+import SearchFilterSortLayout from "./components/SearchFilterSortLayout";
 
+import type { Ticket } from "./types/ticket";
 import type { StatusFilterValue } from "./types/ticket";
 import type { PriorityFilterValue } from "./types/ticket";
+import type { SortOption } from "./types/ticket";
+
 
 const App = () => {
 
@@ -12,6 +15,8 @@ const App = () => {
   const [subjectFilterString, setSubjectFilterString] = useState<string>("");
   const [statusFilterValue, setStatusFilterValue] = useState<StatusFilterValue>("all");
   const [priorityFilterValue, setPriorityFilterValue] = useState<PriorityFilterValue>("all");
+  const [tickets, setTickets] = useState<Ticket[]>(allTickets);
+  const [sortOption, setSortOption] = useState<SortOption>("createdAt_desc");
 
 
   const handleCustomerFilterStringChange = (newFilterString: string) => {
@@ -26,8 +31,12 @@ const App = () => {
     setStatusFilterValue(newFilterValue);
   }
 
-  const handlePriorityFilterValueChange = (newFilterValue: PriorityFilterValue) => {
+  const handlePriorityFilterValueChange = (newFilterValue: PriorityFilterValue): void => {
     setPriorityFilterValue(newFilterValue);
+  }
+
+  const handleSortOptionChange = (newOption: SortOption) => {
+    setSortOption(newOption);
   }
 
   const filteredTickets = tickets.filter(ticket => {
@@ -39,14 +48,41 @@ const App = () => {
     return matchesCustomerName && matchesSubject && matchesStatus && matchesPriority;
   })
 
+  const sortedAndFilteredTickets = filteredTickets.sort((a: Ticket, b: Ticket) => {
+
+    const priorityOrder = {
+      low: 1,
+      medium: 2,
+      high: 3
+    }
+
+    if (sortOption === "createdAt_desc") {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    }
+    else if (sortOption === "createdAt_asc") {
+      return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+    }
+    else if (sortOption === "priority_asc") {
+      return priorityOrder[a.priority] - priorityOrder[b.priority]
+    }
+    else {
+      return priorityOrder[b.priority] - priorityOrder[a.priority]
+    }
+  })
+
   return (
     <>
-      <SearchFilterLayout filteredTickets={filteredTickets} customerFilterString={customerFilterString} handleCustomerFilterStringChange={handleCustomerFilterStringChange} subjectFilterString={subjectFilterString} handleSubjectFilterStringChange={handleSubjectFilterStringChange}
+      <SearchFilterSortLayout
+        sortedAndFilteredTickets={sortedAndFilteredTickets}
+        customerFilterString={customerFilterString}
+        handleCustomerFilterStringChange={handleCustomerFilterStringChange} subjectFilterString={subjectFilterString} handleSubjectFilterStringChange={handleSubjectFilterStringChange}
         statusFilterValue={statusFilterValue} handleStatusFilterValueChange={handleStatusFilterValueChange}
         priorityFilterValue={priorityFilterValue} handlePriorityFilterValueChange={handlePriorityFilterValueChange}
+        sortOption={sortOption}
+        handleSortOptionChange={handleSortOptionChange}
       />
 
-      <CardsList filteredTickets={filteredTickets} />
+      <CardsList sortedAndFilteredTickets={sortedAndFilteredTickets} />
     </>
   )
 }

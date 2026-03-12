@@ -1,23 +1,26 @@
 import CustomerSearchFilter from "./CustomerSearchFilter";
 import SubjectSearchFilter from "./SubjectSearchFilter";
 import StatusFilter from "./StatusFilter";
+import SortSelect from "./SortSelect";
 
-import type { PriorityFilterValue, StatusFilterValue, Ticket } from "../types/ticket";
+import type { PriorityFilterValue, SortOption, StatusFilterValue, Ticket } from "../types/ticket";
 import PriorityFilter from "./PriorityFilter";
 
 type Props = {
-    filteredTickets: Ticket[],
+    sortedAndFilteredTickets: Ticket[],
     customerFilterString: string,
     subjectFilterString: string,
     statusFilterValue: StatusFilterValue,
     priorityFilterValue: PriorityFilterValue,
+    sortOption: SortOption,
     handleCustomerFilterStringChange: (newValue: string) => void,
     handleSubjectFilterStringChange: (newValue: string) => void,
     handleStatusFilterValueChange: (newFilterValue: StatusFilterValue) => void,
-    handlePriorityFilterValueChange: (newFilterValue: PriorityFilterValue) => void
+    handlePriorityFilterValueChange: (newFilterValue: PriorityFilterValue) => void,
+    handleSortOptionChange: (newSortOption: SortOption) => void
 }
 
-const SearchFilterLayout = ({ filteredTickets, customerFilterString, subjectFilterString, handleCustomerFilterStringChange, handleSubjectFilterStringChange, statusFilterValue, handleStatusFilterValueChange, priorityFilterValue, handlePriorityFilterValueChange }: Props) => {
+const SearchFilterSortLayout = ({ sortedAndFilteredTickets, customerFilterString, subjectFilterString, handleCustomerFilterStringChange, handleSubjectFilterStringChange, statusFilterValue, handleStatusFilterValueChange, priorityFilterValue, handlePriorityFilterValueChange, sortOption, handleSortOptionChange }: Props) => {
 
     const hasActiveFilters =
         customerFilterString !== "" ||
@@ -25,7 +28,7 @@ const SearchFilterLayout = ({ filteredTickets, customerFilterString, subjectFilt
         statusFilterValue !== "all" ||
         priorityFilterValue !== "all";
 
-    const resultsLabel = filteredTickets.length === 1 ? "ticket" : "tickets"
+    const resultsLabel = sortedAndFilteredTickets.length === 1 ? "ticket" : "tickets"
 
     return (
         <>
@@ -33,10 +36,11 @@ const SearchFilterLayout = ({ filteredTickets, customerFilterString, subjectFilt
             <SubjectSearchFilter subjectFilterString={subjectFilterString} handleSubjectFilterStringChange={handleSubjectFilterStringChange} />
             <StatusFilter statusFilterValue={statusFilterValue} handleStatusFilterValueChange={handleStatusFilterValueChange} />
             <PriorityFilter priorityFilterValue={priorityFilterValue} handlePriorityFilterValueChange={handlePriorityFilterValueChange} />
-            {hasActiveFilters && <p> {filteredTickets.length} {resultsLabel} found. </p>}
+            <SortSelect sortOption={sortOption} handleSortOptionChange={handleSortOptionChange} />
+            {hasActiveFilters && <p> {sortedAndFilteredTickets.length} {resultsLabel} found. </p>}
         </>
     )
 }
 
 
-export default SearchFilterLayout;
+export default SearchFilterSortLayout;

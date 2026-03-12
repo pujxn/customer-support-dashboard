@@ -6,6 +6,8 @@ export type StatusFilterValue = TicketStatus | "all"
 
 export type PriorityFilterValue = TicketPriority | "all"
 
+export type SortOption = "priority_asc" | "priority_desc" | "createdAt_desc" | "createdAt_asc"
+
 export type Ticket = {
     id: string,
     subject: string,

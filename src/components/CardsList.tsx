@@ -3,14 +3,14 @@ import type { Ticket } from "../types/ticket";
 
 
 type Props = {
-    filteredTickets: Ticket[],
+    sortedAndFilteredTickets: Ticket[],
 }
 
-const CardsList = ({ filteredTickets }: Props) => {
+const CardsList = ({ sortedAndFilteredTickets }: Props) => {
 
     return (
         <div>
-            {filteredTickets.map(ticket => (
+            {sortedAndFilteredTickets.map(ticket => (
                 <TicketCard key={ticket.id} ticket={ticket} />
             ))
             }
