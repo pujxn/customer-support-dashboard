@@ -4,22 +4,22 @@ import type { Ticket } from "../types/ticket";
 
 type Props = {
     filteredTickets: Ticket[],
-    nameFilterString: string | null,
+    creatorFilterString: string | null,
     subjectFilterString: string | null,
-    handleNameFilterStringChange: (newValue: string | null) => void,
+    handleCreatorFilterStringChange: (newValue: string | null) => void,
     handleSubjectFilterStringChange: (newValue: string | null) => void
 }
 
-const SearchFilterLayout = ({ filteredTickets, nameFilterString, subjectFilterString, handleNameFilterStringChange, handleSubjectFilterStringChange }: Props) => {
+const SearchFilterLayout = ({ filteredTickets, creatorFilterString, subjectFilterString, handleCreatorFilterStringChange, handleSubjectFilterStringChange }: Props) => {
 
 
 
     return (
         <>
-            <CreatorSearchFilter nameFilterString={nameFilterString} handleNameFilterStringChange={handleNameFilterStringChange} />
+            <CreatorSearchFilter creatorFilterString={creatorFilterString} handleCreatorFilterStringChange={handleCreatorFilterStringChange} />
             <SubjectSearchFilter subjectFilterString={subjectFilterString} handleSubjectFilterStringChange={handleSubjectFilterStringChange} />
 
-            {(nameFilterString !== null || subjectFilterString !== null) && <p> {filteredTickets.length} {filteredTickets.length > 1 ? "tickets" : "ticket"} found. </p>}
+            {(creatorFilterString !== null || subjectFilterString !== null) && <p> {filteredTickets.length} {filteredTickets.length > 1 ? "tickets" : "ticket"} found. </p>}
         </>
     )
 }

@@ -4,18 +4,18 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { tickets } from '../mock/tickets';
 
 type Props = {
-    nameFilterString: string | null,
-    handleNameFilterStringChange: (newNameFilterString: string | null) => void
+    creatorFilterString: string | null,
+    handleCreatorFilterStringChange: (newCreatorFilterString: string | null) => void
 }
 
-const CreatorSearchFilter = ({ nameFilterString, handleNameFilterStringChange }: Props) => {
+const CreatorSearchFilter = ({ creatorFilterString, handleCreatorFilterStringChange }: Props) => {
     return (
         <Autocomplete
             disablePortal
             freeSolo
             options={tickets.map(ticket => ticket.customerName)}
-            value={nameFilterString}
-            onChange={(e: any, newValue: string | null) => handleNameFilterStringChange(newValue)}
+            value={creatorFilterString}
+            onChange={(e: any, newValue: string | null) => handleCreatorFilterStringChange(newValue)}
             sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} label="Customer Name" />}
         />
