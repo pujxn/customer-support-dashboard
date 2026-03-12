@@ -2,6 +2,8 @@ type TicketStatus = "open" | "in_progress" | "resolved"
 
 type TicketPriority = "low" | "medium" | "high"
 
+export type StatusFilterValue = TicketStatus | "all"
+
 export type Ticket = {
     id: string,
     subject: string,
@@ -11,3 +13,4 @@ export type Ticket = {
     createdAt: string,
     assignee?: string
 }
+
