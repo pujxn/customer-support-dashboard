@@ -6,23 +6,23 @@ import SearchFilterLayout from "./components/SearchFilterLayout";
 
 const App = () => {
 
-  const [creatorFilterString, setCreatorFilterString] = useState<string | null>(null);
-  const [subjectFilterString, setSubjectFilterString] = useState<string | null>(null);
+  const [customerFilterString, setCustomerFilterString] = useState<string>("");
+  const [subjectFilterString, setSubjectFilterString] = useState<string>("");
 
 
-  const handleCreatorFilterStringChange = (newFilterString: string | null) => {
-    setCreatorFilterString(newFilterString);
+  const handleCustomerFilterStringChange = (newFilterString: string) => {
+    setCustomerFilterString(newFilterString);
   }
 
-  const handleSubjectFilterStringChange = (newFilterString: string | null) => {
+  const handleSubjectFilterStringChange = (newFilterString: string) => {
     setSubjectFilterString(newFilterString);
   }
 
-  const filteredTickets = tickets.filter(ticket => ticket.customerName.includes(creatorFilterString ?? "")).filter(ticket => ticket.subject.includes(subjectFilterString ?? ""))
+  const filteredTickets = tickets.filter(ticket => ticket.customerName.toLowerCase().includes(customerFilterString.toLowerCase() ?? "")).filter(ticket => ticket.subject.toLowerCase().includes(subjectFilterString.toLowerCase() ?? ""))
 
   return (
     <>
-      <SearchFilterLayout filteredTickets={filteredTickets} creatorFilterString={creatorFilterString} handleCreatorFilterStringChange={handleCreatorFilterStringChange} subjectFilterString={subjectFilterString} handleSubjectFilterStringChange={handleSubjectFilterStringChange} />
+      <SearchFilterLayout filteredTickets={filteredTickets} customerFilterString={customerFilterString} handleCustomerFilterStringChange={handleCustomerFilterStringChange} subjectFilterString={subjectFilterString} handleSubjectFilterStringChange={handleSubjectFilterStringChange} />
       <CardsList filteredTickets={filteredTickets} />
     </>
   )
