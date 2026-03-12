@@ -24,7 +24,13 @@ const App = () => {
     setStatusFilterValue(newFilterValue);
   }
 
-  const filteredTickets = tickets.filter(ticket => ticket.customerName.toLowerCase().includes(customerFilterString.toLowerCase())).filter(ticket => ticket.subject.toLowerCase().includes(subjectFilterString.toLowerCase()))
+  const filteredTickets = tickets.filter(ticket => {
+    const matchesCustomerName = ticket.customerName.toLowerCase().includes(customerFilterString.toLowerCase());
+    const matchesSubject = ticket.subject.toLowerCase().includes(subjectFilterString.toLowerCase());
+    const matchesStatus = statusFilterValue === "all" || ticket.status === statusFilterValue;
+
+    return matchesCustomerName && matchesSubject && matchesStatus
+  })
 
   return (
     <>

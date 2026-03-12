@@ -1,3 +1,5 @@
+import type { ChangeEvent } from "react";
+
 type Props = {
     customerFilterString: string,
     handleCustomerFilterStringChange: (newCustomerFilterString: string) => void
@@ -7,7 +9,7 @@ const CustomerSearchFilter = ({ customerFilterString, handleCustomerFilterString
     return (
         <input
             value={customerFilterString}
-            onChange={e => handleCustomerFilterStringChange(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleCustomerFilterStringChange(e.target.value)}
             placeholder="Search by customer" />
     );
 }

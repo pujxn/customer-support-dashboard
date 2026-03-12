@@ -1,3 +1,5 @@
+import type { ChangeEvent } from "react";
+
 type Props = {
     subjectFilterString: string,
     handleSubjectFilterStringChange: (subjectFilterString: string) => void
@@ -7,7 +9,7 @@ const SubjectSearchFilter = ({ subjectFilterString, handleSubjectFilterStringCha
     return (
         <input
             value={subjectFilterString}
-            onChange={e => handleSubjectFilterStringChange(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleSubjectFilterStringChange(e.target.value)}
             placeholder="Search by subject" />
     );
 }

@@ -17,13 +17,19 @@ type Props = {
 
 const SearchFilterLayout = ({ filteredTickets, customerFilterString, subjectFilterString, handleCustomerFilterStringChange, handleSubjectFilterStringChange, statusFilterValue, handleStatusFilterValueChange }: Props) => {
 
+    const hasActiveFilters =
+        customerFilterString !== "" ||
+        subjectFilterString !== "" ||
+        statusFilterValue !== "all";
+
+    const resultsLabel = filteredTickets.length === 1 ? "ticket" : "tickets"
 
     return (
         <>
             <CustomerSearchFilter customerFilterString={customerFilterString} handleCustomerFilterStringChange={handleCustomerFilterStringChange} />
             <SubjectSearchFilter subjectFilterString={subjectFilterString} handleSubjectFilterStringChange={handleSubjectFilterStringChange} />
             <StatusFilter statusFilterValue={statusFilterValue} handleStatusFilterValueChange={handleStatusFilterValueChange} />
-            {(customerFilterString !== "" || subjectFilterString !== "") && <p> {filteredTickets.length} {filteredTickets.length > 1 ? "tickets" : "ticket"} found. </p>}
+            {hasActiveFilters && <p> {filteredTickets.length} {resultsLabel} found. </p>}
         </>
     )
 }

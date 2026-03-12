@@ -8,12 +8,9 @@ type Props = {
 }
 
 const StatusFilter = ({ statusFilterValue, handleStatusFilterValueChange }: Props) => {
-    const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        handleStatusFilterValueChange(event.target.value as StatusFilterValue);
-    };
 
     return (
-        <select value={statusFilterValue} onChange={handleChange}>
+        <select value={statusFilterValue} onChange={(e: ChangeEvent<HTMLSelectElement>) => handleStatusFilterValueChange(e.target.value as StatusFilterValue)}>
             <option value="all">All</option>
             <option value="open">Open</option>
             <option value="in_progress">In progress</option>
