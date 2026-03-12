@@ -1,6 +1,6 @@
-export type TicketStatus = "open" | "in_progress" | "resolved"
+type TicketStatus = "open" | "in_progress" | "resolved"
 
-export type TicketPriority = "low" | "medium" | "high"
+type TicketPriority = "low" | "medium" | "high"
 
 export type Ticket = {
     id: string,

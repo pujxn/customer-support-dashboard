@@ -1,14 +1,12 @@
-import { tickets } from "../mock/tickets";
 import TicketCard from "./TicketCard";
+import type { Ticket } from "../types/ticket";
+
 
 type Props = {
-    nameFilterString: string | null,
-    subjectFilterString: string | null
+    filteredTickets: Ticket[],
 }
 
-const CardsList = ({ nameFilterString, subjectFilterString }: Props) => {
-
-    const filteredTickets = tickets.filter(ticket => ticket.customerName.includes(nameFilterString ?? "")).filter(ticket => ticket.subject.includes(subjectFilterString ?? ""))
+const CardsList = ({ filteredTickets }: Props) => {
 
     return (
         <div>

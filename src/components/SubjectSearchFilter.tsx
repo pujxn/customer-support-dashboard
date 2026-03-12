@@ -12,6 +12,7 @@ const SubjectSearchFilter = ({ subjectFilterString, handleSubjectFilterStringCha
     return (
         <Autocomplete
             disablePortal
+            freeSolo
             value={subjectFilterString}
             onChange={(e: any, newValue: string | null) => handleSubjectFilterStringChange(newValue)}
             options={tickets.map(ticket => ticket.subject)}

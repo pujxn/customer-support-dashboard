@@ -1,18 +1,18 @@
 import CreatorSearchFilter from "./CreatorSearchFilter";
 import SubjectSearchFilter from "./SubjectSearchFilter";
-
-import { tickets } from "../mock/tickets";
+import type { Ticket } from "../types/ticket";
 
 type Props = {
+    filteredTickets: Ticket[],
     nameFilterString: string | null,
     subjectFilterString: string | null,
     handleNameFilterStringChange: (newValue: string | null) => void,
     handleSubjectFilterStringChange: (newValue: string | null) => void
 }
 
-const SearchFilterLayout = ({ nameFilterString, subjectFilterString, handleNameFilterStringChange, handleSubjectFilterStringChange }: Props) => {
+const SearchFilterLayout = ({ filteredTickets, nameFilterString, subjectFilterString, handleNameFilterStringChange, handleSubjectFilterStringChange }: Props) => {
 
-    const filteredTickets = tickets.filter(ticket => ticket.customerName.includes(nameFilterString ?? "")).filter(ticket => ticket.subject.includes(subjectFilterString ?? ""))
+
 
     return (
         <>

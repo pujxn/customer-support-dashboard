@@ -12,6 +12,7 @@ const CreatorSearchFilter = ({ nameFilterString, handleNameFilterStringChange }:
     return (
         <Autocomplete
             disablePortal
+            freeSolo
             options={tickets.map(ticket => ticket.customerName)}
             value={nameFilterString}
             onChange={(e: any, newValue: string | null) => handleNameFilterStringChange(newValue)}
