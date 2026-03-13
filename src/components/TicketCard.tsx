@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { Ticket } from "../types/ticket";
 
 type Props = {
@@ -7,7 +8,9 @@ type Props = {
 const TicketCard = ({ ticket }: Props) => {
     return (
         <div>
-            <p>{ticket.subject}</p>
+            <Link to={`/tickets/${ticket.id}`}>
+                <p>{ticket.subject}</p>
+            </Link>
             <p>{ticket.customerName}</p>
             <p>{ticket.status}</p>
             <p>{ticket.priority}</p>
