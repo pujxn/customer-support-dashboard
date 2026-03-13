@@ -14,8 +14,6 @@ const TicketCard = ({ ticket }: Props) => {
             <p>{ticket.customerName}</p>
             <p>{ticket.status}</p>
             <p>{ticket.priority}</p>
-            <p>{new Date(ticket.createdAt).toLocaleDateString()}</p>
-            <p>{ticket.assignee ?? "Unassigned"}</p>
         </div>
     )
 }

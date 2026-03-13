@@ -1,12 +1,16 @@
 import { useState } from "react"
 import { allTickets } from "../mock/tickets";
+
 import CardsList from "./CardsList";
 import SearchFilterSortLayout from "./SearchFilterSortLayout";
+import TicketDetaislPanel from "./TicketDetailsPanel";
 
 import type { Ticket } from "../types/ticket";
 import type { StatusFilterValue } from "../types/ticket";
 import type { PriorityFilterValue } from "../types/ticket";
 import type { SortOption } from "../types/ticket";
+
+import { useParams } from "react-router-dom";
 
 
 const TicketsPage = () => {
@@ -17,6 +21,10 @@ const TicketsPage = () => {
     const [priorityFilterValue, setPriorityFilterValue] = useState<PriorityFilterValue>("all");
     const [tickets, setTickets] = useState<Ticket[]>(allTickets);
     const [sortOption, setSortOption] = useState<SortOption>("createdAt_desc");
+
+    const { id } = useParams();
+
+    const selectedTicket = tickets.find(ticket => ticket.id === id);
 
 
     const handleCustomerFilterStringChange = (newFilterString: string) => {
@@ -73,16 +81,14 @@ const TicketsPage = () => {
     return (
         <>
             <SearchFilterSortLayout
-                sortedAndFilteredTickets={sortedAndFilteredTickets}
-                customerFilterString={customerFilterString}
-                handleCustomerFilterStringChange={handleCustomerFilterStringChange} subjectFilterString={subjectFilterString} handleSubjectFilterStringChange={handleSubjectFilterStringChange}
-                statusFilterValue={statusFilterValue} handleStatusFilterValueChange={handleStatusFilterValueChange}
-                priorityFilterValue={priorityFilterValue} handlePriorityFilterValueChange={handlePriorityFilterValueChange}
-                sortOption={sortOption}
-                handleSortOptionChange={handleSortOptionChange}
+                sortedAndFilteredTickets={sortedAndFilteredTickets} customerFilterString={customerFilterString}
+                handleCustomerFilterStringChange={handleCustomerFilterStringChange} subjectFilterString={subjectFilterString} handleSubjectFilterStringChange={handleSubjectFilterStringChange} statusFilterValue={statusFilterValue} handleStatusFilterValueChange={handleStatusFilterValueChange} priorityFilterValue={priorityFilterValue} handlePriorityFilterValueChange={handlePriorityFilterValueChange} sortOption={sortOption} handleSortOptionChange={handleSortOptionChange}
             />
 
             <CardsList sortedAndFilteredTickets={sortedAndFilteredTickets} />
+
+            {selectedTicket && <TicketDetaislPanel selectedTicket={selectedTicket} />}
+
         </>
     )
 }
