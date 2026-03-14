@@ -87,7 +87,7 @@ const TicketsPage = () => {
 
             <CardsList sortedAndFilteredTickets={sortedAndFilteredTickets} />
 
-            {selectedTicket && <TicketDetaislPanel selectedTicket={selectedTicket} />}
+            {selectedTicket && <TicketDetaislPanel key={selectedTicket.id} selectedTicket={selectedTicket} />}
 
         </>
     )

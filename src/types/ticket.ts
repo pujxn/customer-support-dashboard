@@ -1,6 +1,6 @@
-type TicketStatus = "open" | "in_progress" | "resolved"
+export type TicketStatus = "open" | "in_progress" | "resolved"
 
-type TicketPriority = "low" | "medium" | "high"
+export type TicketPriority = "low" | "medium" | "high"
 
 export type StatusFilterValue = TicketStatus | "all"
 
