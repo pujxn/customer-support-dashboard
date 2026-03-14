@@ -47,6 +47,17 @@ const TicketsPage = () => {
         setSortOption(newOption);
     }
 
+    const handleTicketListUpdate = (updatedTicketId: string, updatedTicket: Ticket): void => {
+        setTickets(prev => prev.map(ticket => {
+            if (ticket.id !== updatedTicketId) {
+                return ticket;
+            }
+            else {
+                return updatedTicket;
+            }
+        }))
+    }
+
     const filteredTickets = tickets.filter(ticket => {
         const matchesCustomerName = ticket.customerName.toLowerCase().includes(customerFilterString.toLowerCase());
         const matchesSubject = ticket.subject.toLowerCase().includes(subjectFilterString.toLowerCase());
@@ -87,7 +98,7 @@ const TicketsPage = () => {
 
             <CardsList sortedAndFilteredTickets={sortedAndFilteredTickets} />
 
-            {selectedTicket && <TicketDetaislPanel key={selectedTicket.id} selectedTicket={selectedTicket} />}
+            {selectedTicket && <TicketDetaislPanel handleTicketListUpdate={handleTicketListUpdate} key={selectedTicket.id} selectedTicket={selectedTicket} />}
 
         </>
     )
